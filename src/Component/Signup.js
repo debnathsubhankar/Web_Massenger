@@ -1,6 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 
 const Signup = () => {
+  const [fName, setFName] = useState();
+  const [lName, SetLName] = useState();
+  const [regEmail, SetRegEmail] = useState();
+  const [resPassword, setRegPassword] = useState();
   return (
     <div className="container mt-5">
       <div className="card col-sm-6 m-auto">

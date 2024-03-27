@@ -9,7 +9,7 @@ const Loging = () => {
     <div className="container mt-5">
       <div className="card m-auto col-sm-6 p-3">
         <div className="m-auto">
-          <span className="mt-2">
+          <span className="ManulaMar">
             <label htmlFor="email">Enter Email :</label>
             <input
               type="text"
@@ -19,7 +19,7 @@ const Loging = () => {
             />
           </span>
           <br />
-          <span className="mt-2">
+          <span className="ManulaMar">
             <label htmlFor="password">Enter Password :</label>
             <input
               type="password"

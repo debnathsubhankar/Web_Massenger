@@ -20,10 +20,6 @@
   background-color: cadetblue !important;
 }
 
-span {
-  margin-top: 2px;
-}
-
 button {
   border-radius: 8px !important;
 }
@@ -31,4 +27,8 @@ button {
 input {
   margin-left: 5px !important;
   border-radius: 5px;
+}
+
+.ManulaMar {
+  margin-top: 10px !important;
 }
