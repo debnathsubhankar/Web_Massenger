@@ -5,6 +5,8 @@ import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
+import { Provider } from "react-redux";
+import store from "./Store/Index";
 
 const firebaseConfig = {
   apiKey: "AIzaSyC5Jw_swsHtt3URn9lttThkaupatQXg5dI",
@@ -21,9 +23,9 @@ const analytics = getAnalytics(app);
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
-  <React.StrictMode>
+  <Provider store={store}>
     <App />
-  </React.StrictMode>
+  </Provider>
 );
 
 // If you want to start measuring performance in your app, pass a function
