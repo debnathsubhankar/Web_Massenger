@@ -4,6 +4,7 @@ import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { initializeApp } from "firebase/app";
+import "firebase/auth";
 import { getAnalytics } from "firebase/analytics";
 import { Provider } from "react-redux";
 import store from "./Store/Index";
