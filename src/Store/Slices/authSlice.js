@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import firebase from "../Index";
+import { firebase } from "firebase/app";
 import "firebase/auth";
 
 // for firebase login
