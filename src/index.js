@@ -3,9 +3,10 @@ import ReactDOM from "react-dom/client";
 import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
-import { initializeApp } from "firebase/app";
-import "firebase/auth";
-import { getAnalytics } from "firebase/analytics";
+// import { initializeApp } from "firebase/app";
+import firebase from "firebase";
+// import "firebase/auth";
+// import { getAnalytics } from "firebase/analytics";
 import { Provider } from "react-redux";
 import store from "./Store/Index";
 
@@ -18,9 +19,10 @@ const firebaseConfig = {
   appId: "1:472089314943:web:51c6089cf8f2ae9118a14a",
   measurementId: "G-GP2R3WJHG9",
 };
+firebase.initializeApp(firebaseConfig);
 
-const app = initializeApp(firebaseConfig);
-const analytics = getAnalytics(app);
+// const app = initializeApp(firebaseConfig);
+// const analytics = getAnalytics(app);
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(

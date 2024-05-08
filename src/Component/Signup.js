@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 const Signup = () => {
   const [fName, setFName] = useState();
-  const [lName, SetLName] = useState();
+  const [lName, setLName] = useState();
   const [regEmail, SetRegEmail] = useState();
   const [resPassword, setRegPassword] = useState();
 

@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import firebase from "../Index";
+import firebase from "firebase/app";
 import "firebase/auth";
 
 // for firebase login
@@ -26,10 +26,10 @@ export const signupAsync = createAsyncThunk(
   "auth/signup",
   async (credentials) => {
     const { fName, lName, regEmail, resPassword } = credentials;
-    const responce = await firebase
+    const response = await firebase
       .auth()
-      .createUser(fName, lName, regEmail, resPassword);
-    return responce.user;
+      .createUserWithEmailAndPassword(fName, lName, regEmail, resPassword);
+    return response.user;
   }
 );
 
@@ -40,7 +40,7 @@ const initialState = {
   error: null,
 };
 
-const authSliceh = createSlice({
+const authSlice = createSlice({
   name: "auth",
   initialState,
   reducers: {},
@@ -78,4 +78,4 @@ const authSliceh = createSlice({
   },
 });
 
-export default authSliceh.reducer;
+export default authSlice.reducer;

@@ -12,7 +12,7 @@ function App() {
         <Header />
         <Routes>
           {/* <Route path="/loging" Component={Loging} /> */}
-          <Route path="/" exact Component={Signup} />
+          <Route path="/" exact component={Signup} />
         </Routes>
       </BrowserRouter>
     </div>
