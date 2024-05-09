@@ -1,34 +1,42 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import firebase from "firebase/app";
-import "firebase/auth";
+// import firebase from "firebase/app";
+// import "firebase/auth";
 
 // for firebase login
 export const loginAsync = createAsyncThunk(
   "auth/login",
-  async (credentials) => {
+  async (credentials, { getState }) => {
     const { email, password } = credentials;
-    const response = await firebase
-      .auth()
-      .signInWithEmailAndPassword(email, password);
+    const firebaseAuth = getState().firebaseAuth; // Get Firebase auth object from state
+    const response = await firebaseAuth.signInWithEmailAndPassword(
+      email,
+      password
+    );
     return response.user;
   }
 );
 
 // for firebase logout
 
-export const logoutAsync = createAsyncThunk("auth/logout", async () => {
-  await firebase.auth().signOut();
-});
+export const logoutAsync = createAsyncThunk(
+  "auth/logout",
+  async (_, { getState }) => {
+    const firebaseAuth = getState().firebaseAuth; // Get Firebase auth object from state
+    await firebaseAuth.signOut();
+  }
+);
 
 // for signUP
 
 export const signupAsync = createAsyncThunk(
   "auth/signup",
-  async (credentials) => {
+  async (credentials, { getState }) => {
     const { fName, lName, regEmail, resPassword } = credentials;
-    const response = await firebase
-      .auth()
-      .createUserWithEmailAndPassword(fName, lName, regEmail, resPassword);
+    const firebaseAuth = getState().firebaseAuth; // Get Firebase auth object from state
+    const response = await firebaseAuth.createUserWithEmailAndPassword(
+      regEmail,
+      resPassword
+    );
     return response.user;
   }
 );
