@@ -32,22 +32,42 @@ const Signup = () => {
             <div className="m-auto">
               <span className="mt-2">
                 <label htmlFor="firstName">First Name :</label>
-                <input type="text" name="firstName" id="firstName" />
+                <input
+                  type="text"
+                  name="firstName"
+                  id="firstName"
+                  onChange={(e) => setFName(e.target.value)}
+                />
               </span>
               <br />
               <span className="mt-2">
                 <label htmlFor="lastName">Last Name :</label>
-                <input type="text" name="lastName" id="lastName" />
+                <input
+                  type="text"
+                  name="lastName"
+                  id="lastName"
+                  onChange={(e) => setLName(e.target.value)}
+                />
               </span>
               <br />
               <span className="mt-2">
                 <label htmlFor="email">Email :</label>
-                <input type="text" name="email" id="email" />
+                <input
+                  type="text"
+                  name="email"
+                  id="email"
+                  onChange={(e) => SetRegEmail(e.target.value)}
+                />
               </span>
               <br />
               <span className="mt-2">
                 <label htmlFor="Password">Password :</label>
-                <input type="text" name="Password" id="Password" />
+                <input
+                  type="text"
+                  name="Password"
+                  id="Password"
+                  onChange={(e) => setRegPassword(e.target.value)}
+                />
               </span>
               <br />
               <span className="mt-2">
