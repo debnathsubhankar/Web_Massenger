@@ -1,4 +1,9 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import {
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+  signOut,
+} from "firebase/auth";
 // import { auth } from "../../index";
 
 // for firebase login
@@ -6,11 +11,8 @@ export const loginAsync = createAsyncThunk(
   "auth/login",
   async (credentials, { getState }) => {
     const { email, password } = credentials;
-    const firebaseAuth = getState().firebaseAuth; // Get Firebase auth object from state
-    const response = await firebaseAuth.signInWithEmailAndPassword(
-      email,
-      password
-    );
+    const auth = getState().auth.auth; // Get Firebase auth object from state
+    const response = await signInWithEmailAndPassword(auth, email, password);
     return response.user;
   }
 );
@@ -20,8 +22,8 @@ export const loginAsync = createAsyncThunk(
 export const logoutAsync = createAsyncThunk(
   "auth/logout",
   async (_, { getState }) => {
-    const firebaseAuth = getState().firebaseAuth; // Get Firebase auth object from state
-    await firebaseAuth.signOut();
+    const auth = getState().auth.auth; // Get Firebase auth object from state
+    await signOut();
   }
 );
 
@@ -31,8 +33,9 @@ export const signupAsync = createAsyncThunk(
   "auth/signup",
   async (credentials, { getState }) => {
     const { fName, lName, regEmail, resPassword } = credentials;
-    const firebaseAuth = getState().firebaseAuth; // Get Firebase auth object from state
-    const response = await firebaseAuth.createUserWithEmailAndPassword(
+    const auth = getState().auth.auth; // Get Firebase auth object from state
+    const response = await createUserWithEmailAndPassword(
+      auth,
       regEmail,
       resPassword
     );
