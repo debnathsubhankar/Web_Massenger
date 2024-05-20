@@ -1,19 +1,21 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import {
   createUserWithEmailAndPassword,
+  getAuth,
   signInWithEmailAndPassword,
   signOut,
 } from "firebase/auth";
-// import { auth } from "../../index";
+import { setDoc, doc, getFirestore } from "firebase/firestore";
 
 // for firebase login
 export const loginAsync = createAsyncThunk(
   "auth/login",
   async (credentials, { getState }) => {
     const { email, password } = credentials;
-    const auth = getState().auth.auth; // Get Firebase auth object from state
+    const auth = getAuth(); // Get Firebase auth object from state
     const response = await signInWithEmailAndPassword(auth, email, password);
-    return response.user;
+    const user = response.user;
+    return user;
   }
 );
 
@@ -22,7 +24,7 @@ export const loginAsync = createAsyncThunk(
 export const logoutAsync = createAsyncThunk(
   "auth/logout",
   async (_, { getState }) => {
-    const auth = getState().auth.auth; // Get Firebase auth object from state
+    const auth = getAuth(); // Get Firebase auth object from state
     await signOut();
   }
 );
@@ -33,13 +35,20 @@ export const signupAsync = createAsyncThunk(
   "auth/signup",
   async (credentials, { getState }) => {
     const { fName, lName, regEmail, resPassword } = credentials;
-    const auth = getState().auth.auth; // Get Firebase auth object from state
+    const auth = getAuth(); // Get Firebase auth object from state
+    const db = getFirestore();
     const response = await createUserWithEmailAndPassword(
       auth,
       regEmail,
       resPassword
     );
-    return response.user;
+    const user = response.user;
+    await setDoc(doc(db, "users", user.uid), {
+      fName,
+      lName,
+      regEmail,
+    });
+    return user;
   }
 );
 

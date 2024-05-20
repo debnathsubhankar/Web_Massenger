@@ -4,8 +4,7 @@ import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { initializeApp } from "firebase/app";
-// import firebase from "firebase/app";
-// import { getAnalytics } from "firebase/analytics";
+import { getFirestore } from "firebase/firestore";
 import "firebase/auth";
 import { Provider } from "react-redux";
 import store from "./Store/Index";
@@ -24,8 +23,10 @@ const firebaseConfig = {
 
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
+const db = getFirestore(app);
 store.auth = auth;
-// export { auth };
+store.db = db;
+
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <Provider store={store}>
