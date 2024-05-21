@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { signupAsync } from "../Store/Slices/authSlice";
 import { useDispatch, useSelector } from "react-redux";
+import { ToastContainer } from "react-toastify";
+
 
 const Signup = () => {
   const [fName, setFName] = useState();
@@ -15,6 +17,7 @@ const Signup = () => {
 
   const signUpHandeler = () => {
     dispatch(signupAsync({ fName, lName, regEmail, resPassword }));
+   
   };
 
   return (
@@ -23,14 +26,19 @@ const Signup = () => {
       {status === "failed" && <p>Error: {error}</p>}
       {user ? (
         <div>
-          <p>Welcome, {user.email}!</p>
-          <button>Logout</button>
+          {/* <p>Welcome, {user.email}!</p>
+          <button>Logout</button> */}
+          
+{
+  <ToastContainer className="w-25"/>
+}
+          
         </div>
       ) : (
-        <div className="container mt-5">
+        <div className="container mt-5 h-100">
           <div className="card col-sm-6 m-auto">
             <div className="m-auto">
-              <span className="mt-2">
+              <span>
                 <label htmlFor="firstName">First Name :</label>
                 <input
                   type="text"
@@ -40,7 +48,7 @@ const Signup = () => {
                 />
               </span>
               <br />
-              <span className="mt-2">
+              <span>
                 <label htmlFor="lastName">Last Name :</label>
                 <input
                   type="text"
@@ -50,7 +58,7 @@ const Signup = () => {
                 />
               </span>
               <br />
-              <span className="mt-2">
+              <span>
                 <label htmlFor="email">Email :</label>
                 <input
                   type="text"
@@ -60,7 +68,7 @@ const Signup = () => {
                 />
               </span>
               <br />
-              <span className="mt-2">
+              <span>
                 <label htmlFor="Password">Password :</label>
                 <input
                   type="text"
@@ -70,8 +78,8 @@ const Signup = () => {
                 />
               </span>
               <br />
-              <span className="mt-2">
-                <button className="btn btn-primary" onClick={signUpHandeler}>
+              <span className="">
+                <button className="btn btn-primary mt-4" onClick={signUpHandeler}>
                   Submit
                 </button>
               </span>
