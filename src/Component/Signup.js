@@ -1,8 +1,7 @@
 import React, { useState } from "react";
 import { signupAsync } from "../Store/Slices/authSlice";
 import { useDispatch, useSelector } from "react-redux";
-import { ToastContainer } from "react-toastify";
-
+import SuccesSignUP from "./SuccesSignUP";
 
 const Signup = () => {
   const [fName, setFName] = useState();
@@ -17,7 +16,6 @@ const Signup = () => {
 
   const signUpHandeler = () => {
     dispatch(signupAsync({ fName, lName, regEmail, resPassword }));
-   
   };
 
   return (
@@ -28,11 +26,7 @@ const Signup = () => {
         <div>
           {/* <p>Welcome, {user.email}!</p>
           <button>Logout</button> */}
-          
-{
-  <ToastContainer className="w-25"/>
-}
-          
+          {<SuccesSignUP />}
         </div>
       ) : (
         <div className="container mt-5 h-100">
@@ -79,7 +73,10 @@ const Signup = () => {
               </span>
               <br />
               <span className="">
-                <button className="btn btn-primary mt-4" onClick={signUpHandeler}>
+                <button
+                  className="btn btn-primary mt-4"
+                  onClick={signUpHandeler}
+                >
                   Submit
                 </button>
               </span>

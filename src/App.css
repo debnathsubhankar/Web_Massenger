@@ -18,7 +18,7 @@
 
 .card {
   background-color: cadetblue !important;
-  height : 250px !important;
+  height: 250px !important;
 }
 
 button {
@@ -34,6 +34,12 @@ input {
   margin-top: 10px !important;
 }
 
-.card span label{
-  margin-top:10px;
+.card span label {
+  margin-top: 10px;
+}
+
+/* toast Container for sucess loging */
+
+.toastContaint {
+  width: 15px;
 }
