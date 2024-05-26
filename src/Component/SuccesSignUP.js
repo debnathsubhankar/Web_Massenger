@@ -8,7 +8,7 @@ const SuccesSignUP = () => {
         <span>
           <i class="fa-solid fa-check"></i>
         </span>
-        <h3>Successfuly Sign Up !</h3>
+        <h3 className="m-auto">Successfuly Sign Up !</h3>
       </div>
     </div>
   );
