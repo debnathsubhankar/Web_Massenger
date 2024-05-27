@@ -20,8 +20,12 @@ const Signup = () => {
 
   return (
     <div>
-      {status === "loading" && <p>Loading...</p>}
-      {status === "failed" && <p>Error: {error}</p>}
+      <div className="succEr">
+        {status === "loading" && <p className="m-auto">Loading...</p>}
+        {status === "failed" && (
+          <p className="text-danger m-auto">Error: {error}</p>
+        )}
+      </div>
       {user ? (
         <div>
           {/* <p>Welcome, {user.email}!</p>
@@ -65,7 +69,7 @@ const Signup = () => {
               <span>
                 <label htmlFor="Password">Password :</label>
                 <input
-                  type="text"
+                  type="password"
                   name="Password"
                   id="Password"
                   onChange={(e) => setRegPassword(e.target.value)}

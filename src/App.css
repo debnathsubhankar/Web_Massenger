@@ -38,8 +38,21 @@ input {
   margin-top: 10px;
 }
 
-/* toast Container for sucess loging */
+.tick_box {
+  height: auto;
+}
 
-.toastContaint {
-  width: 15px;
+.tick_card {
+  height: auto !important;
+}
+
+.succEr {
+  height: 30px;
+  width: 450px;
+  background-color: rgba(0, 225, 255, 0.356);
+  margin: auto;
+  border-radius: 3px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
