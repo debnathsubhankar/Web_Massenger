@@ -34,6 +34,10 @@ input {
   margin-top: 10px !important;
 }
 
+span .btn {
+  margin-top: 15px;
+}
+
 .card span label {
   margin-top: 10px;
 }

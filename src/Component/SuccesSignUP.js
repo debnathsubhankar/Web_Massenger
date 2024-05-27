@@ -11,9 +11,11 @@ const SuccesSignUP = () => {
           <img src="./tick.png" alt="tick" />
         </span>
         <h3 className="mb-2">{user.email} Successfuly Sign Up !</h3>
-        <button type="button" className="btn btn-primary mb-3">
-          Login
-        </button>
+        <a href="/loging">
+          <button type="button" className="btn btn-primary mb-3">
+            Click to Login
+          </button>
+        </a>
       </div>
     </div>
   );

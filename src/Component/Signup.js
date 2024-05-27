@@ -20,12 +20,13 @@ const Signup = () => {
 
   return (
     <div>
-      <div className="succEr">
-        {status === "loading" && <p className="m-auto">Loading...</p>}
-        {status === "failed" && (
-          <p className="text-danger m-auto">Error: {error}</p>
-        )}
-      </div>
+      {status === "loading" && <p className="m-auto">Loading...</p>}
+      {status === "failed" && (
+        <div className="succEr">
+          <p className="text-danger m-auto ">Error: {error}</p>
+        </div>
+      )}
+
       {user ? (
         <div>
           {/* <p>Welcome, {user.email}!</p>
