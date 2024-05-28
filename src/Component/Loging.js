@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { loginAsync } from "../Store/Slices/authSlice";
+import ChatMain from "./Chat/ChatMain";
+
 const Loging = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -20,9 +22,7 @@ const Loging = () => {
       {status === "loading" && <p>Loading...</p>}
       {status === "failed" && <p>Error: {error}</p>}
       {user ? (
-        <div>
-          <p>Welcome, {user.email}!</p>
-        </div>
+        <div>{<ChatMain />}</div>
       ) : (
         <div className="card m-auto col-sm-6 p-3">
           <div className="m-auto">
