@@ -60,3 +60,10 @@ span .btn {
   justify-content: center;
   align-items: center;
 }
+
+/* chat */
+.user_logo img {
+  width: 35px;
+  border: 1px solid gray;
+  border-radius: 50%;
+}
