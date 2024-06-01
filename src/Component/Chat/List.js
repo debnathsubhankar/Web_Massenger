@@ -1,13 +1,17 @@
 const List = () => {
   return (
     <div>
-      <div className="col-sm-3 flex">
-        <span className="user_logo flex">
-          <img src="./user.png" alt="user" />
-        </span>
-        <span className="flex">
-          <p>User Name</p>
-        </span>
+      <div className="d-flex justify-content-between">
+        <div className="">
+          <span className="user_logo">
+            <img src="./user.png" alt="user" />
+          </span>
+        </div>
+        <div>
+          <span className="">
+            <p>User Name</p>
+          </span>
+        </div>
       </div>
     </div>
   );
