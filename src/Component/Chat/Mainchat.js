@@ -4,7 +4,7 @@ import List from "./List";
 import ChatBox from "./ChatBox";
 const Mainchat = () => {
   return (
-    <div className="container mt-5">
+    <div className="container mt-5 chat_box">
       <div className="row">
         <div className="col-sm-4 border-right">
           <List />

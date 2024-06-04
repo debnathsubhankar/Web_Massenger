@@ -62,12 +62,57 @@ span .btn {
 }
 
 /* chat */
+.list {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: scroll;
+}
+
 .user_logo img {
-  width: 35px;
+  width: 45px;
   border: 1px solid gray;
   border-radius: 50%;
 }
 
 .border-right {
   border-right: 1px solid black;
+}
+
+.add_user {
+  padding: 6px;
+  gap: 20px;
+  cursor: pointer;
+  border-bottom: 0.5px solid black;
+}
+
+.add_user img {
+  width: 30px;
+  height: 35px;
+  border: 1px solid gray;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.text {
+  gap: 10px;
+  flex-direction: column;
+  span {
+    font-weight: 500;
+    font-weight: bold;
+  }
+  p {
+    font-size: 14px;
+    font-weight: 400;
+  }
+}
+
+/* chat main container */
+
+.chat_box {
+  height: 90vh;
+  background-color: rgba(119, 136, 153, 0.288);
+  padding: 4px;
+  display: flex;
+  flex-direction: column;
 }
