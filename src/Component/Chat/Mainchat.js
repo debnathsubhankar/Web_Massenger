@@ -6,7 +6,7 @@ const Mainchat = () => {
   return (
     <div className="container mt-5">
       <div className="row">
-        <div className="col-sm-4 border-top">
+        <div className="col-sm-4 border-right">
           <List />
         </div>
         <div className="col-sm-5">
