@@ -2,14 +2,14 @@ const ChatBox = () => {
   return (
     <div>
       <div className="chatHader">
-        <div className="user_icon">
+        <div className="user_icon col-sm-2">
           <img src="./user.png" alt="user" />
         </div>
-        <div className="user_spec">
+        <div className="user_spec col-sm-6">
           <p>Name</p>
           <span>Lorem ipsum dolor.</span>
         </div>
-        <div className="chat_icons">
+        <div className="chat_icons col-sm-4">
           <span>
             <img src="./call.png" alt="call" />
           </span>

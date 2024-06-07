@@ -118,3 +118,23 @@ span .btn {
   display: flex;
   flex-direction: column;
 }
+
+/* chatbox */
+
+.chatHader {
+  display: flex;
+  border-bottom: 0.5px solid rgba(82, 78, 78, 0.336);
+  /* flex-direction: column; */
+}
+
+.user_icon img {
+  width: 30px;
+  height: 35px;
+  border: 1px solid gray;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.chat_icons span img {
+  width: 30px;
+}

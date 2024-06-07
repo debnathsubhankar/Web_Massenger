@@ -9,7 +9,7 @@ const Mainchat = () => {
         <div className="col-sm-4 border-right">
           <List />
         </div>
-        <div className="col-sm-5">
+        <div className="col-sm-5 border-right">
           <ChatBox />
         </div>
         <div className="col-sm-3">
