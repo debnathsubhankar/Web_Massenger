@@ -41,21 +41,21 @@ const List = () => {
           <p>Hello</p>
         </div>
       </div>
-      <div className="add_user d-flex align-items-center mt-5">
+      <div className="add_user d-flex align-items-center">
         <img src="./user.png" alt="user" />
         <div className="text d-flex">
           <span>Suman Roy</span>
           <p>Hello</p>
         </div>
       </div>
-      <div className="add_user d-flex align-items-center mt-5">
+      <div className="add_user d-flex align-items-center">
         <img src="./user.png" alt="user" />
         <div className="text d-flex">
           <span>Suman Roy</span>
           <p>Hello</p>
         </div>
       </div>
-      <div className="add_user d-flex align-items-center mt-5">
+      <div className="add_user d-flex align-items-center">
         <img src="./user.png" alt="user" />
         <div className="text d-flex">
           <span>Suman Roy</span>
