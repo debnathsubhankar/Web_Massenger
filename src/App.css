@@ -138,3 +138,19 @@ span .btn {
 .chat_icons span img {
   width: 30px;
 }
+
+.icons span img {
+  width: 24px;
+}
+
+.center {
+  display: flex;
+  border-bottom: 0.5px solid rgba(82, 78, 78, 0.336);
+}
+.text_area span img {
+  width: 24px;
+}
+
+.text_area input {
+  width: 100px;
+}
