@@ -1,4 +1,13 @@
+import EmojiPicker from "emoji-picker-react";
+import { useState } from "react";
 const ChatBox = () => {
+  const [open, setOpen] = useState(false);
+  const [text, setText] = useState("");
+  const emojiHandeler = (e) => {
+    setText((prev) => prev + e.emoji);
+    setOpen(false);
+  };
+
   return (
     <div>
       <div className="chatHader">
@@ -35,10 +44,21 @@ const ChatBox = () => {
           </span>
         </div>
         <div className="text_area col-sm-9">
-          <input type="text" />
+          <input
+            type="text"
+            value={text}
+            onChange={(e) => setText(e.target.value)}
+          />
           <span>
-            <img src="./emoji.png" alt="emoji" />
+            <img
+              src="./emoji.png"
+              alt="emoji"
+              onClick={() => setOpen((prev) => !prev)}
+            />
           </span>
+          <div className="emoji_picker">
+            <EmojiPicker open={open} onEmojiClick={emojiHandeler} />
+          </div>
           <button className="btn btn-primary">Send</button>
         </div>
       </div>
