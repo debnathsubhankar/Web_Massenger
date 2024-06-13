@@ -174,3 +174,56 @@ span .btn {
   justify-content: space-around;
   align-items: flex-end;
 }
+
+/* Detailes */
+.details_user {
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.details_user span img {
+  width: 75px;
+  object-fit: cover;
+  border: 0.5px lightgray solid;
+  border-radius: 50%;
+}
+
+.details_user span h3 {
+  font-size: 20px;
+  font-weight: 400;
+}
+
+.details_user p {
+  font-size: 14px;
+}
+.options {
+  flex-direction: column;
+}
+
+.opt {
+  /* flex-direction: row; */
+  justify-content: space-between;
+}
+
+.opt span img {
+  width: 18px;
+}
+
+.images {
+  flex-direction: column;
+}
+
+.sub-img {
+  justify-content: space-between;
+}
+.sub-img span img {
+  width: 45px;
+}
+
+.d_icons img {
+  width: 18px;
+  border: 1px black solid;
+  border-radius: 50%;
+  object-fit: fill;
+}
