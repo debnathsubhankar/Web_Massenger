@@ -6,7 +6,8 @@ import {
   signOut,
 } from "firebase/auth";
 import { setDoc, doc, getFirestore } from "firebase/firestore";
-import {toast} from "react-toastify";
+import { set, get, ref, child } from "firebase/database";
+import { toast } from "react-toastify";
 
 // for firebase login
 export const loginAsync = createAsyncThunk(
@@ -49,7 +50,7 @@ export const signupAsync = createAsyncThunk(
       lName,
       regEmail,
     });
-    toast.success("You are successfully Sign up")
+    toast.success("You are successfully Sign up");
     return user;
   }
 );

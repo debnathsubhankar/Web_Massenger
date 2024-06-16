@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { loginAsync } from "../Store/Slices/authSlice";
-
 import { useNavigate } from "react-router-dom";
 
 const Loging = () => {
@@ -9,7 +8,6 @@ const Loging = () => {
   const [password, setPassword] = useState("");
 
   const dispatch = useDispatch();
-
   const user = useSelector((state) => state.auth.user);
   const status = useSelector((state) => state.auth.status);
   const error = useSelector((state) => state.auth.error);
