@@ -1,11 +1,20 @@
 import EmojiPicker from "emoji-picker-react";
 import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { sendData } from "../../Store/Slices/authSlice";
 const ChatBox = () => {
   const [open, setOpen] = useState(false);
   const [text, setText] = useState("");
+  const dispatch = useDispatch();
   const emojiHandeler = (e) => {
     setText((prev) => prev + e.emoji);
     setOpen(false);
+  };
+
+  const submiteChat = (e) => {
+    e.preventDefault();
+    dispatch(sendData({ chat: text }));
+    setText("");
   };
 
   return (
@@ -59,7 +68,9 @@ const ChatBox = () => {
           <div className="emoji_picker">
             <EmojiPicker open={open} onEmojiClick={emojiHandeler} />
           </div>
-          <button className="btn btn-primary">Send</button>
+          <button className="btn btn-primary" onSubmit={submiteChat}>
+            Send
+          </button>
         </div>
       </div>
     </div>
