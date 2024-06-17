@@ -6,7 +6,7 @@ import {
   signOut,
 } from "firebase/auth";
 import { setDoc, doc, getFirestore } from "firebase/firestore";
-import { set, get, ref, child } from "firebase/database";
+import { set, get, ref, child, getDatabase } from "firebase/database";
 import { toast } from "react-toastify";
 
 // for firebase login
@@ -55,6 +55,24 @@ export const signupAsync = createAsyncThunk(
   }
 );
 
+// firebase data send and recived
+export const sendData = createAsyncThunk("firebase/sendData", async (data) => {
+  const database = getDatabase;
+  await set(ref(database, "data/"), data);
+  return data;
+});
+
+export const fatchData = createAsyncThunk("firebase/fatchData", async () => {
+  const database = getDatabase;
+  const dbRef = ref(database);
+  const snapshot = await get(child(dbRef, `data/`));
+  if (snapshot.exists()) {
+    return snapshot.val();
+  } else {
+    throw new Error("No data found");
+  }
+});
+
 // declear the intialState here
 const initialState = {
   user: null,
@@ -96,6 +114,15 @@ const authSlice = createSlice({
       .addCase(logoutAsync.fulfilled, (state) => {
         state.status = "idle";
         state.user = null;
+      })
+      .addCase(sendData.fulfilled, (state, action) => {
+        state.data = action.payload;
+      })
+      .addcase(fatchData.fulfilled, (state, action) => {
+        state.data = action.payload;
+      })
+      .addCase(fatchData.rejected, (state, action) => {
+        state.error = action.error.message;
       });
   },
 });
