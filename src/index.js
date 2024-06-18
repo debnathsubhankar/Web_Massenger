@@ -9,6 +9,7 @@ import "firebase/auth";
 import { Provider } from "react-redux";
 import store from "./Store/Index";
 import { getAuth } from "firebase/auth";
+import { getDatabase } from "firebase/database";
 
 const firebaseConfig = {
   apiKey: "AIzaSyC5Jw_swsHtt3URn9lttThkaupatQXg5dI",
@@ -26,6 +27,8 @@ const auth = getAuth(app);
 const db = getFirestore(app);
 store.auth = auth;
 store.db = db;
+const database = getDatabase(app);
+store.database = database;
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(

@@ -1,7 +1,7 @@
 import EmojiPicker from "emoji-picker-react";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { sendData } from "../../Store/Slices/authSlice";
+import { sendData } from "../../Store/Slices/dataAuth";
 const ChatBox = () => {
   const [open, setOpen] = useState(false);
   const [text, setText] = useState("");

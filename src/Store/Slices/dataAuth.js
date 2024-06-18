@@ -1,4 +1,5 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import { onAuthStateChanged, getAuth } from "firebase/auth";
 import { set, get, ref, child, getDatabase } from "firebase/database";
 
 // firebase data send and recived
@@ -19,6 +20,30 @@ export const fatchData = createAsyncThunk("firebase/fatchData", async () => {
   }
 });
 
+export const fatchUsers = createAsyncThunk("user/fatchusers", async () => {
+  const database = getDatabase();
+  const dbRef = ref(database, "users");
+  const snapshot = await get(dbRef);
+  const users = snapshot.exists() ? snapshot.val() : {};
+  return Object.values(users);
+});
+
+export const fatchCurrentUser = createAsyncThunk(
+  "user/fatchCurrentUser",
+  async () => {
+    const auth = getAuth();
+    return new Promise((resolve, reject) => {
+      onAuthStateChanged(auth, (user) => {
+        if (user) {
+          resolve({ uid: user.uid, email: user.email });
+        } else {
+          reject(new Error("No user logged in"));
+        }
+      });
+    });
+  }
+);
+
 const dataSlice = createSlice({
   name: "data",
   initialState: {
@@ -36,6 +61,18 @@ const dataSlice = createSlice({
         state.data = action.payload;
       })
       .addCase(fatchData.rejected, (state, action) => {
+        state.error = action.error.message;
+      })
+      .addCase(fatchUsers.fulfilled, (state, action) => {
+        state.users = action.payload;
+      })
+      .addCase(fatchUsers.rejected, (state, action) => {
+        state.error = action.error.message;
+      })
+      .addCase(fatchCurrentUser.fulfilled, (state, action) => {
+        state.currentUser = action.payload;
+      })
+      .addCase(fatchCurrentUser.rejected, (state, action) => {
         state.error = action.error.message;
       });
   },
