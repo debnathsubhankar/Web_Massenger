@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { fatchCurrentUser, fatchUsers } from "../../Store/Slices/userSlice";
-import ApiList from "../ApiComponent/apiList";
+import ApiList from "../ApiComponent/ApiList";
 const List = () => {
   const dispatch = useDispatch();
   const users = useSelector((state) => state.user.users);
@@ -31,7 +31,7 @@ const List = () => {
       {users
         .filter((user) => user.uid !== currentUser?.uid)
         .map((user) => {
-          return <ApiList key={user.uid} />;
+          return <ApiList key={user.uid} {...user} />;
         })}
       {/* <div className="add_user d-flex align-items-center">
         <img src="./user.png" alt="user" />
