@@ -3,22 +3,22 @@ import { onAuthStateChanged, getAuth } from "firebase/auth";
 import { set, get, ref, child, getDatabase } from "firebase/database";
 
 // firebase data send and recived
-export const sendData = createAsyncThunk("firebase/sendData", async (data) => {
-  const database = getDatabase;
-  await set(ref(database, "data/"), data);
-  return data;
-});
+// export const sendData = createAsyncThunk("firebase/sendData", async (data) => {
+//   const database = getDatabase;
+//   await set(ref(database, "data/"), data);
+//   return data;
+// });
 
-export const fatchData = createAsyncThunk("firebase/fatchData", async () => {
-  const database = getDatabase;
-  const dbRef = ref(database);
-  const snapshot = await get(child(dbRef, `data/`));
-  if (snapshot.exists()) {
-    return snapshot.val();
-  } else {
-    throw new Error("No data found");
-  }
-});
+// export const fatchData = createAsyncThunk("firebase/fatchData", async () => {
+//   const database = getDatabase;
+//   const dbRef = ref(database);
+//   const snapshot = await get(child(dbRef, `data/`));
+//   if (snapshot.exists()) {
+//     return snapshot.val();
+//   } else {
+//     throw new Error("No data found");
+//   }
+// });
 
 export const fatchUsers = createAsyncThunk("user/fatchusers", async () => {
   const database = getDatabase();
@@ -44,25 +44,32 @@ export const fatchCurrentUser = createAsyncThunk(
   }
 );
 
-const dataSlice = createSlice({
-  name: "data",
+//  name: "data",
+//   initialState: {
+//     data: null,
+//     state: "idle",
+//     error: null,
+
+const userSlice = createSlice({
+  name: "user",
   initialState: {
-    data: null,
+    currantUser: null,
+    users: [],
     state: "idle",
     error: null,
   },
   reducers: {},
   extraReducers: (builder) => {
     builder
-      .addCase(sendData.fulfilled, (state, action) => {
-        state.data = action.payload;
-      })
-      .addCase(fatchData.fulfilled, (state, action) => {
-        state.data = action.payload;
-      })
-      .addCase(fatchData.rejected, (state, action) => {
-        state.error = action.error.message;
-      })
+      // .addCase(sendData.fulfilled, (state, action) => {
+      //   state.data = action.payload;
+      // })
+      // .addCase(fatchData.fulfilled, (state, action) => {
+      //   state.data = action.payload;
+      // })
+      // .addCase(fatchData.rejected, (state, action) => {
+      //   state.error = action.error.message;
+      // })
       .addCase(fatchUsers.fulfilled, (state, action) => {
         state.users = action.payload;
       })
@@ -78,4 +85,4 @@ const dataSlice = createSlice({
   },
 });
 
-export default dataSlice.reducer;
+export default userSlice.reducer;
