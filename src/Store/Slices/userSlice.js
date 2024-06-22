@@ -20,7 +20,7 @@ import { set, get, ref, child, getDatabase } from "firebase/database";
 //   }
 // });
 
-export const fatchUsers = createAsyncThunk("user/fatchusers", async () => {
+export const fatchUsers = createAsyncThunk("user/fatchUsers", async () => {
   const database = getDatabase();
   const dbRef = ref(database, "users");
   const snapshot = await get(dbRef);
