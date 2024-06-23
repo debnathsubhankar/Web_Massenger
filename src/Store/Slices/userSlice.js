@@ -21,11 +21,21 @@ import { set, get, ref, child, getDatabase } from "firebase/database";
 // });
 
 export const fatchUsers = createAsyncThunk("user/fatchUsers", async () => {
-  const database = getDatabase();
-  const dbRef = ref(database, "users");
-  const snapshot = await get(dbRef);
-  const users = snapshot.exists() ? snapshot.val() : {};
-  return Object.values(users);
+  try {
+    const database = getDatabase();
+    const dbRef = ref(database, "users");
+    const snapshot = await get(dbRef);
+    if (snapshot.exists()) {
+      console.log("Fetched Users:", snapshot.val());
+      return Object.values(snapshot.val());
+    } else {
+      console.error("No data found");
+      throw new Error("No data found");
+    }
+  } catch (error) {
+    console.error("Error fetching users:", error);
+    throw error;
+  }
 });
 
 export const fatchCurrentUser = createAsyncThunk(

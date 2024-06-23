@@ -14,6 +14,7 @@ import { getDatabase } from "firebase/database";
 const firebaseConfig = {
   apiKey: "AIzaSyC5Jw_swsHtt3URn9lttThkaupatQXg5dI",
   authDomain: "web-massenger-8fd63.firebaseapp.com",
+  databaseURL: "https://web-massenger-8fd63-default-rtdb.firebaseio.com",
   projectId: "web-massenger-8fd63",
   storageBucket: "web-massenger-8fd63.appspot.com",
   messagingSenderId: "472089314943",
