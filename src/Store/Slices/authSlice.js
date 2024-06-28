@@ -6,7 +6,7 @@ import {
   signOut,
 } from "firebase/auth";
 import { setDoc, doc, getFirestore } from "firebase/firestore";
-// import { set, get, ref, child, getDatabase } from "firebase/database";
+import { set, ref, getDatabase } from "firebase/database";
 import { toast } from "react-toastify";
 
 // for firebase login
@@ -38,14 +38,14 @@ export const signupAsync = createAsyncThunk(
   async (credentials, { getState }) => {
     const { fName, lName, regEmail, resPassword } = credentials;
     const auth = getAuth(); // Get Firebase auth object from state
-    const db = getFirestore();
+    const db = getDatabase();
     const response = await createUserWithEmailAndPassword(
       auth,
       regEmail,
       resPassword
     );
     const user = response.user;
-    await setDoc(doc(db, "users", user.uid), {
+    await set(ref(db, "users", user.uid), {
       fName,
       lName,
       regEmail,
