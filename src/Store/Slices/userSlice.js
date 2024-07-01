@@ -1,6 +1,5 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { onAuthStateChanged, getAuth } from "firebase/auth";
-import { push } from "firebase/database";
+import { getAuth } from "firebase/auth";
 import { collection, getFirestore, getDocs } from "firebase/firestore";
 
 export const fatchUsers = createAsyncThunk(
@@ -27,6 +26,7 @@ export const fatchUsers = createAsyncThunk(
 );
 
 const initialState = {
+  currentUser: null,
   users: [],
   state: "idle",
   error: null,
@@ -38,7 +38,6 @@ const userSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder
-
       .addCase(fatchUsers.fulfilled, (state, action) => {
         state.users = action.payload;
       })
