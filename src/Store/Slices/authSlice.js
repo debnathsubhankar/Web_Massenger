@@ -35,45 +35,28 @@ export const logoutAsync = createAsyncThunk(
 
 export const signupAsync = createAsyncThunk(
   "auth/signup",
-  async (credentials, { getState }) => {
+  async (credentials) => {
     const { fName, lName, regEmail, resPassword } = credentials;
     const auth = getAuth(); // Get Firebase auth object from state
-    const db = getDatabase();
+    const db = getFirestore();
     const response = await createUserWithEmailAndPassword(
       auth,
       regEmail,
       resPassword
     );
     const user = response.user;
-    await set(ref(db, "users", user.uid), {
+    await setDoc(doc(db, "users", user.uid), {
       fName,
       lName,
       regEmail,
+      email: regEmail,
+      uid: user.uid,
     });
     toast.success("You are successfully Sign up");
     return user;
   }
 );
 
-// firebase data send and recived
-// export const sendData = createAsyncThunk("firebase/sendData", async (data) => {
-//   const database = getDatabase;
-//   await set(ref(database, "data/"), data);
-//   return data;
-// });
-
-// export const fatchData = createAsyncThunk("firebase/fatchData", async () => {
-//   const database = getDatabase;
-//   const dbRef = ref(database);
-//   const snapshot = await get(child(dbRef, `data/`));
-//   if (snapshot.exists()) {
-//     return snapshot.val();
-//   } else {
-//     throw new Error("No data found");
-//   }
-// });
-
-// declear the intialState here
 const initialState = {
   user: null,
   status: "idle",

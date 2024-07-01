@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
-import { fatchCurrentUser, fatchUsers } from "../../Store/Slices/userSlice";
+import { fatchUsers } from "../../Store/Slices/userSlice";
 import ApiList from "../ApiComponent/ApiList";
 const List = () => {
   const dispatch = useDispatch();
@@ -8,10 +8,9 @@ const List = () => {
   const currentUser = useSelector((state) => state.user.currentUser);
   const status = useSelector((state) => state.user.status);
   const error = useSelector((state) => state.user.error);
+
   useEffect(() => {
-    dispatch(fatchCurrentUser()).then(() => {
-      dispatch(fatchUsers());
-    });
+    dispatch(fatchUsers());
   }, [dispatch]);
 
   return (
@@ -28,11 +27,9 @@ const List = () => {
           </span>
         </div>
       </div>
-      {users
-        .filter((user) => user.uid !== currentUser?.uid)
-        .map((user) => {
-          return <ApiList key={user.uid} {...user} />;
-        })}
+      {users.map((user) => {
+        return <ApiList key={user.uid} users={user} />;
+      })}
       {/* <div className="add_user d-flex align-items-center">
         <img src="./user.png" alt="user" />
         <div className="text d-flex">

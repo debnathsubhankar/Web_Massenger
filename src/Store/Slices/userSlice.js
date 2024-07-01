@@ -1,95 +1,48 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { onAuthStateChanged, getAuth } from "firebase/auth";
-import { set, get, ref, child, getDatabase } from "firebase/database";
+import { push } from "firebase/database";
+import { collection, getFirestore, getDocs } from "firebase/firestore";
 
-// firebase data send and recived
-// export const sendData = createAsyncThunk("firebase/sendData", async (data) => {
-//   const database = getDatabase;
-//   await set(ref(database, "data/"), data);
-//   return data;
-// });
+export const fatchUsers = createAsyncThunk(
+  "user/fatchUser",
+  async (_, { getState, rejectWithValue }) => {
+    try {
+      const db = getFirestore();
+      const auth = getAuth();
+      const currentUser = auth.currentUser;
+      const usersCollection = collection(db, "users");
+      const snapshot = await getDocs(usersCollection);
 
-// export const fatchData = createAsyncThunk("firebase/fatchData", async () => {
-//   const database = getDatabase;
-//   const dbRef = ref(database);
-//   const snapshot = await get(child(dbRef, `data/`));
-//   if (snapshot.exists()) {
-//     return snapshot.val();
-//   } else {
-//     throw new Error("No data found");
-//   }
-// });
-
-export const fatchUsers = createAsyncThunk("user/fatchUsers", async () => {
-  try {
-    const database = getDatabase();
-    const dbRef = ref(database, "users");
-    const snapshot = await get(dbRef);
-    if (snapshot.exists()) {
-      console.log("Fetched Users:", snapshot.val());
-      return Object.values(snapshot.val());
-    } else {
-      console.error("No data found");
-      throw new Error("No data found");
-    }
-  } catch (error) {
-    console.error("Error fetching users:", error);
-    throw error;
-  }
-});
-
-export const fatchCurrentUser = createAsyncThunk(
-  "user/fatchCurrentUser",
-  async () => {
-    const auth = getAuth();
-    return new Promise((resolve, reject) => {
-      onAuthStateChanged(auth, (user) => {
-        if (user) {
-          resolve({ uid: user.uid, email: user.email });
-        } else {
-          reject(new Error("No user logged in"));
+      const users = [];
+      snapshot.forEach((doc) => {
+        if (doc.id !== currentUser.uid) {
+          users.push({ uid: doc.id, ...doc.data() });
         }
       });
-    });
+      return users;
+    } catch (error) {
+      rejectWithValue(error.message);
+    }
   }
 );
 
-//  name: "data",
-//   initialState: {
-//     data: null,
-//     state: "idle",
-//     error: null,
+const initialState = {
+  users: [],
+  state: "idle",
+  error: null,
+};
 
 const userSlice = createSlice({
   name: "user",
-  initialState: {
-    currantUser: null,
-    users: [],
-    state: "idle",
-    error: null,
-  },
+  initialState,
   reducers: {},
   extraReducers: (builder) => {
     builder
-      // .addCase(sendData.fulfilled, (state, action) => {
-      //   state.data = action.payload;
-      // })
-      // .addCase(fatchData.fulfilled, (state, action) => {
-      //   state.data = action.payload;
-      // })
-      // .addCase(fatchData.rejected, (state, action) => {
-      //   state.error = action.error.message;
-      // })
+
       .addCase(fatchUsers.fulfilled, (state, action) => {
         state.users = action.payload;
       })
       .addCase(fatchUsers.rejected, (state, action) => {
-        state.error = action.error.message;
-      })
-      .addCase(fatchCurrentUser.fulfilled, (state, action) => {
-        state.currentUser = action.payload;
-      })
-      .addCase(fatchCurrentUser.rejected, (state, action) => {
         state.error = action.error.message;
       });
   },
