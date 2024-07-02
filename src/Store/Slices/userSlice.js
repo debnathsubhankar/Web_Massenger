@@ -26,7 +26,6 @@ export const fatchUsers = createAsyncThunk(
 );
 
 const initialState = {
-  currentUser: null,
   users: [],
   state: "idle",
   error: null,

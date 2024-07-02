@@ -7,27 +7,56 @@ const List = () => {
   const users = useSelector((state) => state.user.users);
   const status = useSelector((state) => state.user.status);
   const error = useSelector((state) => state.user.error);
+  const currentUser = useSelector((state) => state.currentUser.data);
+  const currStatus = useSelector((state) => state.currentUser.status);
+  const currError = useSelector((state) => state.currentUser.error);
 
   useEffect(() => {
     dispatch(fatchUsers());
   }, [dispatch]);
 
+  if (currStatus === "loading") {
+    return;
+    <div>
+      <p>Loading....</p>
+    </div>;
+  }
+  if (currStatus === "failed") {
+    return <div>{currError}</div>;
+  }
+
   return (
     <div className="list">
-      <div className="d-flex justify-content-between mb-5">
-        <div className="">
-          <span className="user_logo">
-            <img src="./user.png" alt="user" />
-          </span>
+      {currentUser ? (
+        <div className="d-flex justify-content-between mb-5">
+          <div className="">
+            <span className="user_logo">
+              <img src="./user.png" alt="user" />
+            </span>
+          </div>
+          <div>
+            <span className="">
+              <p>{currentUser.email}</p>
+            </span>
+          </div>
         </div>
-        <div>
-          <span className="">
-            <p>User Name</p>
-          </span>
+      ) : (
+        <div className="d-flex justify-content-between mb-5">
+          <div className="">
+            <span className="user_logo">
+              <img src="./user.png" alt="user" />
+            </span>
+          </div>
+          <div>
+            <span className="">
+              <p>User Name</p>
+            </span>
+          </div>
         </div>
-      </div>
+      )}
+
       {users.map((user) => {
-        return <ApiList key={user.uid} {...user} />;
+        return <ApiList key={user.uid} users={user} />;
       })}
     </div>
   );
