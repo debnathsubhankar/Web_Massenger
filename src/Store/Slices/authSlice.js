@@ -2,11 +2,11 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import {
   createUserWithEmailAndPassword,
   getAuth,
+  onAuthStateChanged,
   signInWithEmailAndPassword,
   signOut,
 } from "firebase/auth";
 import { setDoc, doc, getFirestore } from "firebase/firestore";
-
 import { toast } from "react-toastify";
 
 // for firebase login
@@ -18,6 +18,24 @@ export const loginAsync = createAsyncThunk(
     const response = await signInWithEmailAndPassword(auth, email, password);
     const user = response.user;
     return user;
+  }
+);
+
+// for loading
+
+export const checkAuthState = createAsyncThunk(
+  "auth/checkAuthState",
+  async (_, { dispatch }) => {
+    const auth = getAuth();
+    return new Promise((resolve) => {
+      onAuthStateChanged(auth, (user) => {
+        if (user) {
+          resolve(user);
+        } else {
+          resolve(null);
+        }
+      });
+    });
   }
 );
 

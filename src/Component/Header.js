@@ -1,6 +1,12 @@
 import React from "react";
+import { useDispatch } from "react-redux";
+import { loginAsync } from "../Store/Slices/authSlice";
 
 const Header = () => {
+  const dispatch = useDispatch();
+  const userLogout = () => {
+    dispatch(loginAsync());
+  };
   return (
     <div className="container row bg-light m-auto p-2">
       <div className="col-sm-3 title">
@@ -20,7 +26,9 @@ const Header = () => {
       </div>
       <div className="col-sm-3 sig_title">
         <span>
-          <a href="">Log Out</a>
+          <a href="" onClick={userLogout}>
+            Log Out
+          </a>
         </span>
       </div>
     </div>

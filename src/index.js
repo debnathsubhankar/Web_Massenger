@@ -8,7 +8,11 @@ import { getFirestore } from "firebase/firestore";
 import "firebase/auth";
 import { Provider } from "react-redux";
 import store from "./Store/Index";
-import { getAuth } from "firebase/auth";
+import {
+  getAuth,
+  browserLocalPersistence,
+  setPersistence,
+} from "firebase/auth";
 import { getDatabase } from "firebase/database";
 
 const firebaseConfig = {
@@ -30,7 +34,9 @@ store.auth = auth;
 store.db = db;
 const database = getDatabase(app);
 store.database = database;
-
+setPersistence(auth, browserLocalPersistence)
+  .then(() => console.log("Persistence set to local."))
+  .catch((error) => console.error("Error setting persistence: ", error));
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <Provider store={store}>
