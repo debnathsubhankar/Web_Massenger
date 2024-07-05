@@ -13,11 +13,12 @@ const Mainchat = () => {
   useEffect(() => {
     dispatch(fetchCurrentUser());
   }, [dispatch]);
+  const userLog = window.localStorage.getItem("userLog");
 
   return (
     <div>
       {status === "loading" && <p>Loading....</p>}
-      {user ? (
+      {userLog ? (
         <div className="container mt-5 chat_box">
           <div className="row">
             <div className="col-sm-4 border-right">

@@ -17,6 +17,7 @@ export const loginAsync = createAsyncThunk(
     const auth = getAuth(); // Get Firebase auth object from state
     const response = await signInWithEmailAndPassword(auth, email, password);
     const user = response.user;
+    window.localStorage.setItem("userLog", true);
     return user;
   }
 );
@@ -43,9 +44,11 @@ export const checkAuthState = createAsyncThunk(
 
 export const logoutAsync = createAsyncThunk(
   "auth/logout",
-  async (_, { getState }) => {
+  async (_, { dispatch }) => {
     const auth = getAuth(); // Get Firebase auth object from state
-    await signOut();
+    await signOut(auth);
+    window.localStorage.removeItem("userLog");
+    dispatch();
   }
 );
 
@@ -83,7 +86,11 @@ const initialState = {
 const authSlice = createSlice({
   name: "auth",
   initialState,
-  reducers: {},
+  reducers: {
+    logoutSucess: (state) => {
+      state.user = null;
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(loginAsync.pending, (state) => {
@@ -114,30 +121,18 @@ const authSlice = createSlice({
       .addCase(logoutAsync.fulfilled, (state) => {
         state.status = "idle";
         state.user = null;
+      })
+      .addCase(checkAuthState.fulfilled, (state, action) => {
+        state.user = action.payload;
+      })
+      .addCase(checkAuthState.pending, (state) => {
+        state.status = "loading";
+      })
+      .addCase(checkAuthState.rejected, (state) => {
+        state.status = "failed";
       });
   },
 });
 
-// const chatSlice = createSlice({
-//   name: "chat",
-//   initialState: {
-//     data: null,
-//     state: "idle",
-//     error: null,
-//   },
-//   reducers: {},
-//   extraReducers: (builder) => {
-//     builder
-//       .addCase(sendData.fulfilled, (state, action) => {
-//         state.data = action.payload;
-//       })
-//       .addCase(fatchData.fulfilled, (state, action) => {
-//         state.data = action.payload;
-//       })
-//       .addCase(fatchData.rejected, (state, action) => {
-//         state.error = action.error.message;
-//       });
-//   },
-// });
-
+export const { logoutSuccess } = authSlice.actions;
 export default authSlice.reducer;

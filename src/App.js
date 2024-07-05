@@ -7,12 +7,13 @@ import Mainchat from "./Component/Chat/Mainchat";
 import { Route, Routes, BrowserRouter } from "react-router-dom";
 
 function App() {
+  const userLog = window.localStorage.getItem("userLog");
   return (
     <div className="App">
       <BrowserRouter>
         <Header />
         <Routes>
-          <Route path="/" exact Component={Signup} />
+          <Route path="/" exact Component={userLog ? Mainchat : Signup} />
           <Route path="/loging" Component={Loging} />
           <Route path="/chat" Component={Mainchat} />
         </Routes>

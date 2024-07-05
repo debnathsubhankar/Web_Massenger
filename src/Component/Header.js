@@ -1,11 +1,15 @@
 import React from "react";
 import { useDispatch } from "react-redux";
 import { loginAsync } from "../Store/Slices/authSlice";
+import { useNavigate } from "react-router-dom";
 
 const Header = () => {
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const userLogout = () => {
     dispatch(loginAsync());
+    window.localStorage.removeItem("userLog");
+    navigate("/loging");
   };
   return (
     <div className="container row bg-light m-auto p-2">

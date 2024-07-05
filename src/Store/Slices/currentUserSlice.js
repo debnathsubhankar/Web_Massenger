@@ -1,8 +1,4 @@
-import {
-  createActionCreatorInvariantMiddleware,
-  createAsyncThunk,
-  createSlice,
-} from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
 import { getAuth } from "firebase/auth";
 import { getFirestore, getDoc, doc } from "firebase/firestore";
