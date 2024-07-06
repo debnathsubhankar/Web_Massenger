@@ -4,15 +4,15 @@ import List from "./List";
 import ChatBox from "./ChatBox";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchCurrentUser } from "../../Store/Slices/currentUserSlice";
+// import { fetchCurrentUser } from "../../Store/Slices/currentUserSlice";
 
 const Mainchat = () => {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.auth.user);
   const status = useSelector((state) => state.auth.status);
-  useEffect(() => {
-    dispatch(fetchCurrentUser());
-  }, [dispatch]);
+  // useEffect(() => {
+  //   dispatch(fetchCurrentUser());
+  // }, [dispatch]);
   const userLog = window.localStorage.getItem("userLog");
 
   return (

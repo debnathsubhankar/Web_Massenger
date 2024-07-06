@@ -5,9 +5,19 @@ import Loging from "./Component/Loging";
 import Signup from "./Component/Signup";
 import Mainchat from "./Component/Chat/Mainchat";
 import { Route, Routes, BrowserRouter } from "react-router-dom";
+// import { useEffect, useState } from "react";
+// import { getAuth } from "firebase/auth";
 
 function App() {
   const userLog = window.localStorage.getItem("userLog");
+  // const auth = getAuth();
+  // const [user, setUser] = useState();
+
+  // useEffect(() => {
+  //   auth.onAuthStateChanged(user);
+  //   setUser(user);
+  // });
+
   return (
     <div className="App">
       <BrowserRouter>

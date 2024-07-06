@@ -24,22 +24,6 @@ export const loginAsync = createAsyncThunk(
 
 // for loading
 
-export const checkAuthState = createAsyncThunk(
-  "auth/checkAuthState",
-  async (_, { dispatch }) => {
-    const auth = getAuth();
-    return new Promise((resolve) => {
-      onAuthStateChanged(auth, (user) => {
-        if (user) {
-          resolve(user);
-        } else {
-          resolve(null);
-        }
-      });
-    });
-  }
-);
-
 // for firebase logout
 
 export const logoutAsync = createAsyncThunk(
@@ -47,7 +31,6 @@ export const logoutAsync = createAsyncThunk(
   async (_, { dispatch }) => {
     const auth = getAuth(); // Get Firebase auth object from state
     await signOut(auth);
-    window.localStorage.removeItem("userLog");
     dispatch();
   }
 );
@@ -121,16 +104,16 @@ const authSlice = createSlice({
       .addCase(logoutAsync.fulfilled, (state) => {
         state.status = "idle";
         state.user = null;
-      })
-      .addCase(checkAuthState.fulfilled, (state, action) => {
-        state.user = action.payload;
-      })
-      .addCase(checkAuthState.pending, (state) => {
-        state.status = "loading";
-      })
-      .addCase(checkAuthState.rejected, (state) => {
-        state.status = "failed";
       });
+    // .addCase(checkAuthState.fulfilled, (state, action) => {
+    //   state.user = action.payload;
+    // })
+    // .addCase(checkAuthState.pending, (state) => {
+    //   state.status = "loading";
+    // })
+    // .addCase(checkAuthState.rejected, (state) => {
+    //   state.status = "failed";
+    // });
   },
 });
 
