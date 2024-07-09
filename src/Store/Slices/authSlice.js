@@ -17,7 +17,6 @@ export const loginAsync = createAsyncThunk(
     const auth = getAuth(); // Get Firebase auth object from state
     const response = await signInWithEmailAndPassword(auth, email, password);
     const user = response.user;
-    window.localStorage.setItem("userLog", true);
     return user;
   }
 );

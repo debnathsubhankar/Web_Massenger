@@ -9,21 +9,12 @@ import { Route, Routes, BrowserRouter } from "react-router-dom";
 // import { getAuth } from "firebase/auth";
 
 function App() {
-  const userLog = window.localStorage.getItem("userLog");
-  // const auth = getAuth();
-  // const [user, setUser] = useState();
-
-  // useEffect(() => {
-  //   auth.onAuthStateChanged(user);
-  //   setUser(user);
-  // });
-
   return (
     <div className="App">
       <BrowserRouter>
         <Header />
         <Routes>
-          <Route path="/" exact Component={userLog ? Mainchat : Signup} />
+          <Route path="/" exact Component={Signup} />
           <Route path="/loging" Component={Loging} />
           <Route path="/chat" Component={Mainchat} />
         </Routes>
