@@ -5,6 +5,7 @@ const ApiList = ({ users }) => {
   const dispatch = useDispatch;
   const handleUserClick = () => {
     dispatch(setActiveUser(users));
+    console.log(users);
   };
   return (
     <div

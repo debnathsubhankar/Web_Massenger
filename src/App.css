@@ -227,3 +227,10 @@ span .btn {
   border-radius: 50%;
   object-fit: fill;
 }
+
+/* chat Center */
+
+.messagesent {
+  display: flex;
+  margin-left: 350px;
+}
