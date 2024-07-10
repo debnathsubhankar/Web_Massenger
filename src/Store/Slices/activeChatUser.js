@@ -18,4 +18,4 @@ const activeChatSlice = createSlice({
 });
 
 export const { setActiveUser, clearActiveUser } = activeChatSlice.actions;
-export default activeChatSlice;
+export default activeChatSlice.reducer;

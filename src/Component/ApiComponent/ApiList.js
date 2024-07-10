@@ -1,12 +1,15 @@
 import React from "react";
 import { useDispatch } from "react-redux";
 import { setActiveUser } from "../../Store/Slices/activeChatUser";
+
 const ApiList = ({ users }) => {
-  const dispatch = useDispatch;
+  const dispatch = useDispatch();
+
   const handleUserClick = () => {
     dispatch(setActiveUser(users));
     console.log(users);
   };
+
   return (
     <div
       className="add_user d-flex align-items-center"

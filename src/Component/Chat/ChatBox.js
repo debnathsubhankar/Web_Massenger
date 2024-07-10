@@ -1,11 +1,12 @@
+import React, { useState, useEffect } from "react";
+import { useSelector } from "react-redux";
 import EmojiPicker from "emoji-picker-react";
-import { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
 import {
   addDoc,
   collection,
   getFirestore,
   onSnapshot,
+  orderBy,
   query,
   where,
 } from "firebase/firestore";
@@ -17,7 +18,6 @@ const ChatBox = () => {
   const activeChatUser = useSelector(
     (state) => state.activeChat.activeChatUser
   );
-  const dispatch = useDispatch();
   const db = getFirestore();
   const auth = useSelector((state) => state.auth.user);
 
@@ -26,7 +26,8 @@ const ChatBox = () => {
       const massegesRef = collection(db, "masseges");
       const q = query(
         massegesRef,
-        where("chatId", "==", getChatId(auth.uid, activeChatUser.uid))
+        where("chatId", "==", getChatId(auth.uid, activeChatUser.uid)),
+        orderBy("timeStamp", "asc")
       );
 
       const unSubscrib = onSnapshot(q, (querySnapshot) => {
@@ -131,7 +132,7 @@ const ChatBox = () => {
           <div className="emoji_picker">
             <EmojiPicker open={open} onEmojiClick={emojiHandeler} />
           </div>
-          <button className="btn btn-primary" onSubmit={submiteChat}>
+          <button className="btn btn-primary" onClick={submiteChat}>
             Send
           </button>
         </div>
