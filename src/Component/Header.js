@@ -1,15 +1,26 @@
 import React from "react";
 import { useDispatch } from "react-redux";
 import { loginAsync } from "../Store/Slices/authSlice";
-import { useNavigate } from "react-router-dom";
-
+import { useNavigate, Link } from "react-router-dom";
+import { useState } from "react";
 const Header = () => {
+  const [logIn, setLogIn] = useState(true);
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const userLogout = () => {
+  const userLogout = (e) => {
+    e.preventDefault();
     dispatch(loginAsync());
-    window.localStorage.removeItem("userLog");
     navigate("/loging");
+  };
+
+  const clickToLogIn = () => {
+    setLogIn(false);
+    console.log(logIn);
+  };
+
+  const clickToSignup = () => {
+    setLogIn(true);
+    console.log(logIn);
   };
   return (
     <div className="container row bg-light m-auto p-2">
@@ -17,22 +28,31 @@ const Header = () => {
         <h4 className="bold">Web Massenger</h4>
       </div>
       <div className="col-sm-3 sig_title">
-        <span>
-          <a href="http://">Sign Up</a>
-        </span>
-        <span>
-          <a href="http://">Log In</a>
-        </span>
-      </div>
-
-      <div className="col-sm-3 consumer_name">
-        <h4>Subhankar</h4>
+        {logIn ? (
+          <span>
+            <button className="btn btn-primery">
+              <Link to="/loging" onClick={clickToLogIn}>
+                Log In
+              </Link>
+            </button>
+          </span>
+        ) : (
+          <span>
+            <button className="btn btn-primery">
+              <Link to="/" onClick={clickToSignup}>
+                Sign Up
+              </Link>
+            </button>
+          </span>
+        )}
       </div>
       <div className="col-sm-3 sig_title">
         <span>
-          <a href="" onClick={userLogout}>
-            Log Out
-          </a>
+          <button className="btn btn-primary">
+            <a href="" onClick={userLogout}>
+              Log Out
+            </a>
+          </button>
         </span>
       </div>
     </div>

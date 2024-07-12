@@ -25,9 +25,9 @@ const ChatBox = () => {
     if (activeChatUser) {
       const massegesRef = collection(db, "masseges");
       const q = query(
-        massegesRef,
-        where("chatId", "==", getChatId(auth.uid, activeChatUser.uid)),
-        orderBy("timeStamp", "asc")
+        massegesRef
+        // where("chatId", "==", getChatId(auth.uid, activeChatUser.uid)),
+        // orderBy("timeStamp", "asc")
       );
 
       const unSubscrib = onSnapshot(q, (querySnapshot) => {
@@ -35,6 +35,7 @@ const ChatBox = () => {
         querySnapshot.forEach((doc) => {
           fetchMasseges.push(doc.data());
         });
+        console.log("Fetched Messages:", fetchMasseges); // Add this line
         setMasseges(fetchMasseges);
       });
       return () => unSubscrib();
@@ -74,7 +75,7 @@ const ChatBox = () => {
               <img src="./user.png" alt="user" />
             </div>
             <div className="user_spec col-sm-6">
-              <p className="mb-0">{`${activeChatUser.fName}${activeChatUser.lName}`}</p>
+              <p className="mb-0">{`${activeChatUser.fName} ${activeChatUser.lName}`}</p>
               <p>{activeChatUser.email}</p>
             </div>
           </>
