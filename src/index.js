@@ -25,7 +25,7 @@ const firebaseConfig = {
   appId: "1:472089314943:web:51c6089cf8f2ae9118a14a",
   measurementId: "G-GP2R3WJHG9",
 };
-// firebase.initializeApp(firebaseConfig);
+
 
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
@@ -44,7 +44,5 @@ root.render(
   </Provider>
 );
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
+
 reportWebVitals();

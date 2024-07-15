@@ -25,9 +25,9 @@ const ChatBox = () => {
     if (activeChatUser) {
       const massegesRef = collection(db, "masseges");
       const q = query(
-        massegesRef
-        // where("chatId", "==", getChatId(auth.uid, activeChatUser.uid)),
-        // orderBy("timeStamp", "asc")
+        massegesRef,
+        where("chatId", "==", getChatId(auth.uid, activeChatUser.uid)),
+        orderBy("timeStamp", "asc")
       );
 
       const unSubscrib = onSnapshot(q, (querySnapshot) => {
@@ -51,7 +51,7 @@ const ChatBox = () => {
     setOpen(false);
   };
 
-  const submiteChat = async (e) => {
+  const submitChat = async (e) => {
     e.preventDefault();
     if (text.trim() && activeChatUser) {
       const massegesRef = collection(db, "masseges");
@@ -133,7 +133,7 @@ const ChatBox = () => {
           <div className="emoji_picker">
             <EmojiPicker open={open} onEmojiClick={emojiHandeler} />
           </div>
-          <button className="btn btn-primary" onClick={submiteChat}>
+          <button className="btn btn-primary" onClick={submitChat}>
             Send
           </button>
         </div>
