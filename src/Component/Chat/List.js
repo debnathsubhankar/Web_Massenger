@@ -33,8 +33,8 @@ const List = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        await dispatch(fatchUsers());
-        await dispatch(fatchCurrData());
+        await dispatch(fatchUsers()).unwrap();
+        await fatchCurrData();
       } catch (err) {
         console.error("Error fetching data:", err);
       }

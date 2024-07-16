@@ -31,9 +31,9 @@ const ApiList = ({ users }) => {
         const querySnapshot = await getDocs(q);
         if (!querySnapshot.empty) {
           const massegeData = querySnapshot.docs[0].data();
-          lastMassege(massegeData.text);
+          setLastMassege(massegeData.text);
         } else {
-          lastMassege("");
+          setLastMassege("");
         }
       }
     };
